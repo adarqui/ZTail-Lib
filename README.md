@@ -11,6 +11,8 @@ Build
 
 ```
 make
+make install
+/usr/local/bin/ztail
 ```
 
 
