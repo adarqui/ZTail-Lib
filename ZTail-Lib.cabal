@@ -1,0 +1,54 @@
+Name:		ZTail-Lib
+Version:	1.1
+Author:		Original Author: Dylan Simon (dylan@dylex.net)
+Maintainer:     andrew.darqui@gmail.com
+License:        BSD3
+License-File:	LICENSE
+Synopsis:	Multi-file, colored, filtered log tailer.
+Description:	The amazing ZTail turned into a library.
+Category:	System,Console
+Build-Type:	Simple
+Cabal-Version:	>= 1.8
+tested-with:    GHC == 6.12.3
+extra-source-files: README.md
+
+Source-Repository head
+    Type:	git
+    Location:	https://github.com/adarqui/ZTail-Lib
+
+Flag INotify
+    Description:	Enable inotify support
+    Default:		True
+
+Executable ztail
+    Main-is:		ztail.hs
+    HS-Source-Dirs:     examples
+    Build-Depends:	base == 4.*, regex-compat, unix, time, old-locale, process, array, containers, filepath, ZTail-Lib
+    GHC-Options:        -O2
+    if flag(inotify)
+        Build-Depends:	hinotify >= 0.3.6
+        CPP-Options:	-DINOTIFY
+
+Executable ztail-raw
+    Main-is:		ztail-raw.hs
+    HS-Source-Dirs:     examples
+    Build-Depends:	base == 4.*, regex-compat, unix, time, old-locale, process, array, containers, filepath, ZTail-Lib
+    GHC-Options:        -O2
+    if flag(inotify)
+        Build-Depends:	hinotify >= 0.3.6
+        CPP-Options:	-DINOTIFY
+
+Library
+    HS-Source-Dirs:     src
+    Exposed-Modules:    ZTail
+                        ZTail.ZTail
+                        ZTail.Util
+                        ZTail.Display
+                        ZTail.TailTypes
+                        ZTail.TailHandle
+                        ZTail.Tail
+    Build-Depends:	base == 4.*, regex-compat, unix, time, old-locale, process, array, containers, filepath
+    GHC-Options:        -Wall
+    if flag(inotify)
+        Build-Depends:	hinotify >= 0.3.6
+        CPP-Options:	-DINOTIFY
