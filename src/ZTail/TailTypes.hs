@@ -1,4 +1,4 @@
-{-# LANGUAGE CPP, Rank2Types #-}
+{-# LANGUAGE CPP, Rank2Types, DeriveGeneric, StandaloneDeriving #-}
 module ZTail.TailTypes (
     Interval,
     fromInterval,
@@ -12,6 +12,8 @@ module ZTail.TailTypes (
     tail2packet
   ) where
 
+import Data.Aeson
+import GHC.Generics
 import qualified System.Posix.Types
 import qualified System.Posix.IO
 import qualified Text.Regex
@@ -85,7 +87,19 @@ data TailPacket = TailPacket
   , buf :: String
   , clock :: Data.Time.Clock.UTCTime
   , tz :: Data.Time.LocalTime.TimeZone
-} deriving (Show)
+} deriving (Show, Generic)
+
+instance FromJSON TailPacket
+instance ToJSON TailPacket
+
+deriving instance Generic Data.Time.Clock.UTCTime
+deriving instance Generic Data.Time.LocalTime.TimeZone
+
+--instance FromJSON Data.Time.Clock.UTCTime
+--instance ToJSON Data.Time.Clock.UTCTime
+
+instance FromJSON Data.Time.LocalTime.TimeZone
+instance ToJSON Data.Time.LocalTime.TimeZone
 
 tailName :: Tail -> String
 tailName = show . tailTarg

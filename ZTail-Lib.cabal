@@ -23,7 +23,7 @@ Flag INotify
 Executable ztail
     Main-is:		ztail.hs
     HS-Source-Dirs:     examples
-    Build-Depends:	base == 4.*, regex-compat, unix, time, old-locale, process, array, containers, filepath, ZTail-Lib
+    Build-Depends:	base == 4.*, ZTail-Lib
     GHC-Options:        -O2
     if flag(inotify)
         Build-Depends:	hinotify >= 0.3.6
@@ -32,7 +32,7 @@ Executable ztail
 Executable ztail-raw
     Main-is:		ztail-raw.hs
     HS-Source-Dirs:     examples
-    Build-Depends:	base == 4.*, regex-compat, unix, time, old-locale, process, array, containers, filepath, ZTail-Lib
+    Build-Depends:	base == 4.*, ZTail-Lib
     GHC-Options:        -O2
     if flag(inotify)
         Build-Depends:	hinotify >= 0.3.6
@@ -47,7 +47,7 @@ Library
                         ZTail.TailTypes
                         ZTail.TailHandle
                         ZTail.Tail
-    Build-Depends:	base == 4.*, regex-compat, unix, time, old-locale, process, array, containers, filepath
+    Build-Depends:	base == 4.*, aeson, regex-compat, unix, time, old-locale, process, array, containers, filepath
     GHC-Options:        -Wall
     if flag(inotify)
         Build-Depends:	hinotify >= 0.3.6
