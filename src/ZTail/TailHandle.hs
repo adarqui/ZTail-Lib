@@ -293,9 +293,9 @@ runTail :: TailRuntime -> Tail -> IO ()
 runTail tr tail = Control.Exception.mask $ \unmask ->
   let
     catch th SignalReopen = reopenTail th -- >>= wait
-    catch th SignalPoll = reopenTail th
+--    catch th SignalPoll = reopenTail th
 -- might be a 'bug'
---    catch th SignalPoll = return th{ thAgain = True }
+    catch th SignalPoll = return th{ thAgain = True }
     catch th@TailHandle{ thDirStream = Just _, thDirList = l, thTail = t } (SignalInsert f new) = do
       subTail th new f
       if tailDirList t
