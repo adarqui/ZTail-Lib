@@ -87,7 +87,7 @@ data TailPacket = TailPacket
   , buf :: String
   , clock :: Data.Time.Clock.UTCTime
   , tz :: Data.Time.LocalTime.TimeZone
-} deriving (Show, Generic)
+} deriving (Read, Show, Generic)
 
 instance FromJSON TailPacket
 instance ToJSON TailPacket
